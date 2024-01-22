@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- Meta tags para la codificación de caracteres y la configuración de la vista -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Enlaces a fuentes externas de Google Fonts y al archivo de estilos CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Inter:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Título de la página -->
+    <title>JS Game</title>
+</head>
+
+<body>
+    <!-- Contenedor principal -->
+    <div class="container">
+        <!-- Contenido del contenedor -->
+        <div class="container__contenido">
+            <!-- Información del juego -->
+            <div class="container__informaciones">
+                <!-- Texto principal y párrafo -->
+                <div class="container__texto">
+                    <h1></h1>
+                    <p class="texto__parrafo"></p>
+                </div>
+                
+                <!-- Entrada de usuario (número), botones de juego y reinicio -->
+                <input type="number" id="valorUsuario" min="1" max="10" class="container__input">
+                <div class="chute container__botones">
+                    <button onclick="verificarIntento();" class="container__boton">Intentar</button>
+                    <button onclick="reiniciarJuego();" class="container__boton" id="reiniciar" disabled>Nuevo juego</button>
+                </div>
+            </div>
+            
+            <!-- Imagen de una persona mirando a la izquierda -->
+            <img src="./img/ia.png" alt="Una persona mirando a la izquierda" class="container__imagen-persona" />
+        </div>
+    </div>
+
+    <!-- Inclusión del archivo de script de JavaScript -->
+    <script src="app.js"></script>
+</body>
+
+</html>
