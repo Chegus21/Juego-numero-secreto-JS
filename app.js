@@ -2,8 +2,9 @@
 let numeroSecreto = 0;
 let intentos = 0;
 let listaNumerosSorteados = [];
-let numeroMaximo = 100;
+let numeroMaximo = 10;
 let numerosIntentados = [];
+let maximoIntentos = 6;
 
 // Función para asignar texto a un elemento HTML
 function asignarTextoElemento(elemento, texto) {
@@ -14,25 +15,30 @@ function asignarTextoElemento(elemento, texto) {
 
 // Función para verificar el intento del usuario
 function verificarIntento() {
+    if (intentos >= maximoIntentos) {
+        asignarTextoElemento('p', `Agotaste tus ${maximoIntentos} intentos. El número secreto era ${numeroSecreto}. \n Numeros probados: ${obtenerNumerosProbados()}`);
+        document.getElementById('reiniciar').removeAttribute('disabled');
+        return;
+    }
+
     let numeroDeUsuario = parseInt(document.getElementById('valorUsuario').value);
 
     numerosIntentados.push(numeroDeUsuario);
-
     if (numeroDeUsuario === numeroSecreto) {
         // El usuario acertó
-        asignarTextoElemento('p',`Acertaste el número en ${intentos} ${(intentos === 1) ? 'vez' : 'veces'}`);
+        asignarTextoElemento('p',`Acertaste el número en ${intentos} ${(intentos === 1) ? 'vez' : 'veces'} \n Numeros probados: ${obtenerNumerosProbados()}`);
         document.getElementById('reiniciar').removeAttribute('disabled');
-	asignarTextoElemento('p', `Numeros probados: ${obtenerNumerosProbados}, `)
     } else {
-        // El usuario no acertó
+    // El usuario no acertó
         if (numeroDeUsuario > numeroSecreto) {
-            asignarTextoElemento('p','El número secreto es menor');
+            asignarTextoElemento('p',`El número secreto es menor \nNumeros probados: ${obtenerNumerosProbados()},`);
         } else {
-            asignarTextoElemento('p','El número secreto es mayor');
+            asignarTextoElemento('p',`El número secreto es mayor \nNumeros probados: ${obtenerNumerosProbados()},`);
         }
         intentos++;
         limpiarCaja();
-    }
+    }   
+
     return;
 }
 
@@ -69,6 +75,7 @@ function condicionesIniciales() {
     numeroSecreto = generarNumeroSecreto();
     intentos = 1;
     console.log(numeroSecreto);
+    numerosIntentados = [];
 }
 
 // Función para reiniciar el juego
@@ -81,10 +88,11 @@ function reiniciarJuego() {
     condicionesIniciales();
     // Deshabilitar el botón de nuevo juego
     document.querySelector('#reiniciar').setAttribute('disabled','true');
+    condicionesIniciales();
 }
 
 // Función para mostrar los numeros que se han usado
-function obtenerNumerosProbados (){
+function obtenerNumerosProbados(){
 	return numerosIntentados.join(", ");
 }
 
