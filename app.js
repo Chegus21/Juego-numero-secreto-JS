@@ -2,7 +2,8 @@
 let numeroSecreto = 0;
 let intentos = 0;
 let listaNumerosSorteados = [];
-let numeroMaximo = 10;
+let numeroMaximo = 100;
+let numerosIntentados = [];
 
 // Función para asignar texto a un elemento HTML
 function asignarTextoElemento(elemento, texto) {
@@ -14,11 +15,14 @@ function asignarTextoElemento(elemento, texto) {
 // Función para verificar el intento del usuario
 function verificarIntento() {
     let numeroDeUsuario = parseInt(document.getElementById('valorUsuario').value);
-    
+
+    numerosIntentados.push(numeroDeUsuario);
+
     if (numeroDeUsuario === numeroSecreto) {
         // El usuario acertó
         asignarTextoElemento('p',`Acertaste el número en ${intentos} ${(intentos === 1) ? 'vez' : 'veces'}`);
         document.getElementById('reiniciar').removeAttribute('disabled');
+	asignarTextoElemento('p', `Numeros probados: ${obtenerNumerosProbados}, `)
     } else {
         // El usuario no acertó
         if (numeroDeUsuario > numeroSecreto) {
@@ -77,6 +81,11 @@ function reiniciarJuego() {
     condicionesIniciales();
     // Deshabilitar el botón de nuevo juego
     document.querySelector('#reiniciar').setAttribute('disabled','true');
+}
+
+// Función para mostrar los numeros que se han usado
+function obtenerNumerosProbados (){
+	return numerosIntentados.join(", ");
 }
 
 // Llamada a la función para establecer condiciones iniciales al cargar la página
