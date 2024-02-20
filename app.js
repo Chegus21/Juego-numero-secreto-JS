@@ -15,7 +15,7 @@ function asignarTextoElemento(elemento, texto) {
 
 // Función para verificar el intento del usuario
 function verificarIntento() {
-    if (intentos >= maximoIntentos) {
+    if (intentos > maximoIntentos) {
         asignarTextoElemento('p', `Agotaste tus ${maximoIntentos} intentos. El número secreto era ${numeroSecreto}. \n Numeros probados: ${obtenerNumerosProbados()}`);
         document.getElementById('reiniciar').removeAttribute('disabled');
         return;
